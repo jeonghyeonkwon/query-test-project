@@ -37,15 +37,14 @@ public class Study1User {
                       String userPassword,
                       String userName,
                       String address,
-                      Study1Skill skill,
+
                       Study1Team team){
         this.uuid = uuid;
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;
         this.address = address;
-        this.study1SkillList.add(skill);
-        skill.setUser(this);
+
         this.team = team;
     }
 }

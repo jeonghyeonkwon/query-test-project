@@ -21,11 +21,11 @@ public class Study1Skill {
 
     protected Study1Skill(){}
 
-    public Study1Skill(String uuid,String skillName){
+    public Study1Skill(String uuid,String skillName,Study1User user){
         this.uuid = uuid;
         this.skillName = skillName;
-    }
-    public void setUser(Study1User user) {
         this.user = user;
+        user.getStudy1SkillList().add(this);
     }
+
 }

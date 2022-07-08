@@ -16,7 +16,7 @@ public class Study1Controller {
     private final Study1Service study1Service;
     @GetMapping("/init")
     public ResponseEntity init(){
-
+        System.out.println("데이터 초기화중");
         study1Service.initDb();
 
         return new ResponseEntity(HttpStatus.CREATED);
