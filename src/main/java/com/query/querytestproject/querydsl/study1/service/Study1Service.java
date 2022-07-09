@@ -1,5 +1,6 @@
 package com.query.querytestproject.querydsl.study1.service;
 
+import com.query.querytestproject.querydsl.study1.dto.BasicUserDto;
 import com.query.querytestproject.querydsl.study1.model.Study1Skill;
 import com.query.querytestproject.querydsl.study1.model.Study1Team;
 import com.query.querytestproject.querydsl.study1.model.Study1User;
@@ -7,6 +8,10 @@ import com.query.querytestproject.querydsl.study1.repository.Study1SkillReposito
 import com.query.querytestproject.querydsl.study1.repository.Study1TeamRepository;
 import com.query.querytestproject.querydsl.study1.repository.Study1UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,16 +36,16 @@ public class Study1Service {
             teamRepository.save(team1);
             teamRepository.save(team2);
 
-        for(int i=1;i<=1000;i++){
+        for(int i=1;i<=25000;i++){
             Study1User user;
             if(i%2==0){
                 user = new Study1User(UUID.randomUUID().toString(),
-                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,team1);
+                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,Long.valueOf(i),team1);
 
             }
             else{
                 user = new Study1User(UUID.randomUUID().toString(),
-                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,team2);
+                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,Long.valueOf(i),team2);
 
             }
             userRepository.save(user);
@@ -52,4 +57,31 @@ public class Study1Service {
             skillRepository.saveAll(skillList);
         }
     }
+
+
+
+    public ResponseEntity findExist(String userId) {
+        System.out.println("exist");
+
+        long startTime = System.currentTimeMillis();
+
+        Boolean aBoolean = userRepository.dslExist(userId);
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime);
+        return new ResponseEntity(aBoolean,HttpStatus.OK);
+    }
+    public ResponseEntity findFetchFirst(String userId) {
+        System.out.println("fetchFirst");
+
+        long startTime = System.currentTimeMillis();
+
+        Boolean aBoolean = userRepository.dslFetchFirst(userId);
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime);
+        return new ResponseEntity(aBoolean,HttpStatus.OK);
+    }
+//    public ResponseEntity list(Pageable pageable) {
+//        Page<BasicUserDto> basicUserDtos = userRepository.userPage(pageable);
+//        return new ResponseEntity(basicUserDtos,HttpStatus.OK);
+//    }
 }

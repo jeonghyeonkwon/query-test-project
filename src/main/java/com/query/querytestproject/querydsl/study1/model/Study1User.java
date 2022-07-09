@@ -29,6 +29,8 @@ public class Study1User {
     @JoinColumn(name="TEAM_PK")
     private Study1Team team;
 
+    //몇 개 생성되었는지 확인차
+    private Long sortValue;
 
     protected Study1User(){}
 
@@ -37,14 +39,14 @@ public class Study1User {
                       String userPassword,
                       String userName,
                       String address,
-
+                      Long sortValue,
                       Study1Team team){
         this.uuid = uuid;
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;
         this.address = address;
-
+        this.sortValue = sortValue;
         this.team = team;
     }
 }

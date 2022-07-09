@@ -2,10 +2,14 @@ package com.query.querytestproject.querydsl.study1.controller;
 
 import com.query.querytestproject.querydsl.study1.service.Study1Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,4 +25,19 @@ public class Study1Controller {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
+
+    @GetMapping("/user/exist")
+    public ResponseEntity findUserExist(@RequestParam("userId") String userId){
+        return study1Service.findExist(userId);
+
+    }
+    @GetMapping("/user/fetch-first")
+    public ResponseEntity findUserFetchFirst(@RequestParam("userId") String userId){
+        return study1Service.findFetchFirst(userId);
+    }
+//
+//    @GetMapping("/user")
+//    public ResponseEntity list(@PageableDefault(size = 10,sort = "sortValue",direction = Sort.Direction.ASC)Pageable pageable){
+//        return study1Service.list(pageable);
+//    }
 }
