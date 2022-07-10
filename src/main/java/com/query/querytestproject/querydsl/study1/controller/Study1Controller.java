@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/study1")
 public class Study1Controller {
-    // https://www.youtube.com/watch?v=zMAX7g6rO_Y 실습 해보기
+
     private final Study1Service study1Service;
     @GetMapping("/init")
     public ResponseEntity init(){
@@ -25,7 +25,7 @@ public class Study1Controller {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
-
+    // https://www.youtube.com/watch?v=zMAX7g6rO_Y 실습 해보기-------------------------------
     @GetMapping("/user/exist")
     public ResponseEntity findUserExist(@RequestParam("userId") String userId){
         return study1Service.findExist(userId);
@@ -35,9 +35,10 @@ public class Study1Controller {
     public ResponseEntity findUserFetchFirst(@RequestParam("userId") String userId){
         return study1Service.findFetchFirst(userId);
     }
-//
-//    @GetMapping("/user")
-//    public ResponseEntity list(@PageableDefault(size = 10,sort = "sortValue",direction = Sort.Direction.ASC)Pageable pageable){
-//        return study1Service.list(pageable);
-//    }
+
+    // ---------------------------페이지 네이션 dto 쿼리 수 테스트 --------------------------
+    @GetMapping("/user")
+    public ResponseEntity list(@PageableDefault(size = 10,sort = "sortValue",direction = Sort.Direction.ASC)Pageable pageable){
+        return study1Service.list(pageable);
+    }
 }

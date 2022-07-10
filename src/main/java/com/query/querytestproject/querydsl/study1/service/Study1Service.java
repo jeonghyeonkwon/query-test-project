@@ -1,6 +1,6 @@
 package com.query.querytestproject.querydsl.study1.service;
 
-import com.query.querytestproject.querydsl.study1.dto.BasicUserDto;
+import com.query.querytestproject.querydsl.study1.dto.Study1PageUserDto;
 import com.query.querytestproject.querydsl.study1.model.Study1Skill;
 import com.query.querytestproject.querydsl.study1.model.Study1Team;
 import com.query.querytestproject.querydsl.study1.model.Study1User;
@@ -80,8 +80,8 @@ public class Study1Service {
         System.out.println(endTime-startTime);
         return new ResponseEntity(aBoolean,HttpStatus.OK);
     }
-//    public ResponseEntity list(Pageable pageable) {
-//        Page<BasicUserDto> basicUserDtos = userRepository.userPage(pageable);
-//        return new ResponseEntity(basicUserDtos,HttpStatus.OK);
-//    }
+    public ResponseEntity list(Pageable pageable) {
+        Page<Study1PageUserDto> basicUserDtos = userRepository.dslUserPage(pageable);
+        return new ResponseEntity(basicUserDtos,HttpStatus.OK);
+    }
 }

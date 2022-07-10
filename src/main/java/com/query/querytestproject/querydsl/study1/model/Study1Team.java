@@ -16,7 +16,8 @@ public class Study1Team {
 
     protected Study1Team() {}
 
-    public Study1Team(String uuid,String teamName){
+    public Study1Team(String uuid,
+                      String teamName){
         this.uuid = uuid;
         this.teamName = teamName;
     }

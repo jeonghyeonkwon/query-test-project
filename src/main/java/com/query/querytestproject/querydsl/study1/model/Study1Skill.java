@@ -21,7 +21,9 @@ public class Study1Skill {
 
     protected Study1Skill(){}
 
-    public Study1Skill(String uuid,String skillName,Study1User user){
+    public Study1Skill(String uuid,
+                       String skillName,
+                       Study1User user){
         this.uuid = uuid;
         this.skillName = skillName;
         this.user = user;
