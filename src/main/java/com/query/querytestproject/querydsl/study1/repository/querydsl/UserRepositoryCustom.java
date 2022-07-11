@@ -11,4 +11,8 @@ public interface UserRepositoryCustom {
 
     Page<Study1PageUserDto> dslUserPage(Pageable pageable);
 
+
+    void dslUserOrderByTest();
+
+
 }
