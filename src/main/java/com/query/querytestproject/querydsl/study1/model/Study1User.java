@@ -21,6 +21,7 @@ public class Study1User {
     private String userName;
 
     private String address;
+    private Long staticValue;
 
     @OneToMany(mappedBy = "user")
     private List<Study1Skill> study1SkillList = new ArrayList<>();
@@ -40,6 +41,7 @@ public class Study1User {
                       String userName,
                       String address,
                       Long sortValue,
+                      Long staticValue,
                       Study1Team team){
         this.uuid = uuid;
         this.userId = userId;
@@ -47,6 +49,11 @@ public class Study1User {
         this.userName = userName;
         this.address = address;
         this.sortValue = sortValue;
+        this.staticValue = staticValue;
         this.team = team;
+    }
+
+    public void updateStaticValue(Long changeValue) {
+        this.staticValue = changeValue;
     }
 }

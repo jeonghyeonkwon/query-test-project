@@ -1,6 +1,7 @@
 package com.query.querytestproject.querydsl.study1.repository.querydsl;
 
 import com.query.querytestproject.querydsl.study1.dto.Study1PageUserDto;
+import com.query.querytestproject.querydsl.study1.dto.Study1UserStaticValueDto;
 import com.query.querytestproject.querydsl.study1.repository.OrderByNull;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -70,5 +71,10 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         //group by를 이용하면 order by가 굳이 fileSort가 발생한다. 이를 해결하기 위해서는 querydsl에서 따로 작업 해줘야 한다.
 
         jpaQueryFactory.selectFrom(study1User).groupBy(study1User.team.uuid).orderBy(OrderByNull.DEFAULT);
+    }
+
+    @Override
+    public void dslChangeStaticValue(Study1UserStaticValueDto dto) {
+        jpaQueryFactory.update(study1User).where(study1User.staticValue.eq(dto.getCurrentValue())).set(study1User.sortValue,dto.getChangeValue()).execute();
     }
 }

@@ -1,6 +1,7 @@
 package com.query.querytestproject.querydsl.study1.repository.querydsl;
 
 import com.query.querytestproject.querydsl.study1.dto.Study1PageUserDto;
+import com.query.querytestproject.querydsl.study1.dto.Study1UserStaticValueDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,6 @@ public interface UserRepositoryCustom {
 
     void dslUserOrderByTest();
 
+    void dslChangeStaticValue(Study1UserStaticValueDto dto);
 
 }

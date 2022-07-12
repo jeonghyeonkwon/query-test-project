@@ -1,6 +1,7 @@
 package com.query.querytestproject.querydsl.study1.service;
 
 import com.query.querytestproject.querydsl.study1.dto.Study1PageUserDto;
+import com.query.querytestproject.querydsl.study1.dto.Study1UserStaticValueDto;
 import com.query.querytestproject.querydsl.study1.model.Study1Skill;
 import com.query.querytestproject.querydsl.study1.model.Study1Team;
 import com.query.querytestproject.querydsl.study1.model.Study1User;
@@ -40,13 +41,11 @@ public class Study1Service {
             Study1User user;
             if(i%2==0){
                 user = new Study1User(UUID.randomUUID().toString(),
-                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,Long.valueOf(i),team1);
-
+                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,Long.valueOf(i),1L,team1);
             }
             else{
                 user = new Study1User(UUID.randomUUID().toString(),
-                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,Long.valueOf(i),team2);
-
+                        "userId"+i,"userPassword"+i,"유저이름" + i,"주소"+i,Long.valueOf(i),2L,team2);
             }
             userRepository.save(user);
             List<Study1Skill> skillList = new ArrayList<>();
@@ -83,5 +82,24 @@ public class Study1Service {
     public ResponseEntity list(Pageable pageable) {
         Page<Study1PageUserDto> basicUserDtos = userRepository.dslUserPage(pageable);
         return new ResponseEntity(basicUserDtos,HttpStatus.OK);
+    }
+    @Transactional
+    public ResponseEntity changeStaticValue(Study1UserStaticValueDto dto) {
+        System.out.println("changeStaticValue");
+        long startTime = System.currentTimeMillis();
+        userRepository.dslChangeStaticValue(dto);
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    public ResponseEntity changeDirtyStaticValue(Study1UserStaticValueDto dto) {
+        System.out.println("changeDirtyStaticValue");
+        long startTime = System.currentTimeMillis();
+        List<Study1User> userList = userRepository.findUserByStaticValue(dto.getCurrentValue());
+        userList.forEach(user->user.updateStaticValue(dto.getChangeValue()));
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

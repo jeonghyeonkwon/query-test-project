@@ -1,5 +1,6 @@
 package com.query.querytestproject.querydsl.study1.controller;
 
+import com.query.querytestproject.querydsl.study1.dto.Study1UserStaticValueDto;
 import com.query.querytestproject.querydsl.study1.service.Study1Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -7,10 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +32,16 @@ public class Study1Controller {
     @GetMapping("/user/fetch-first")
     public ResponseEntity findUserFetchFirst(@RequestParam("userId") String userId){
         return study1Service.findFetchFirst(userId);
+    }
+
+
+    @PatchMapping("/user")
+    public ResponseEntity changeStaticValue(@RequestBody Study1UserStaticValueDto dto){
+        return study1Service.changeStaticValue(dto);
+    }
+    @PatchMapping("/user-dirty")
+    public ResponseEntity changeDirtyStaticValue(@RequestBody Study1UserStaticValueDto dto){
+        return study1Service.changeDirtyStaticValue(dto);
     }
 
     // ---------------------------페이지 네이션 dto 쿼리 수 테스트 --------------------------
