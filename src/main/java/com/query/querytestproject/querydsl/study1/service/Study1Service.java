@@ -83,6 +83,8 @@ public class Study1Service {
         Page<Study1PageUserDto> basicUserDtos = userRepository.dslUserPage(pageable);
         return new ResponseEntity(basicUserDtos,HttpStatus.OK);
     }
+
+
     @Transactional
     public ResponseEntity changeStaticValue(Study1UserStaticValueDto dto) {
         System.out.println("changeStaticValue");
@@ -92,7 +94,7 @@ public class Study1Service {
         System.out.println(endTime-startTime);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
+    @Transactional
     public ResponseEntity changeDirtyStaticValue(Study1UserStaticValueDto dto) {
         System.out.println("changeDirtyStaticValue");
         long startTime = System.currentTimeMillis();

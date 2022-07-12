@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface Study1UserRepository extends JpaRepository<Study1User,String> , UserRepositoryCustom {
 
-    @Query("SELECT user FROM Study1User user WHERE user.staticValue =: currentValue")
+    @Query("SELECT user FROM Study1User user WHERE user.staticValue = :currentValue")
     List<Study1User> findUserByStaticValue(Long currentValue);
 }

@@ -34,7 +34,7 @@ public class Study1Controller {
         return study1Service.findFetchFirst(userId);
     }
 
-
+    //더티 체킹과 차이가 심하게 나는 것 확인
     @PatchMapping("/user")
     public ResponseEntity changeStaticValue(@RequestBody Study1UserStaticValueDto dto){
         return study1Service.changeStaticValue(dto);

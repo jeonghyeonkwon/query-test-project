@@ -75,6 +75,6 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @Override
     public void dslChangeStaticValue(Study1UserStaticValueDto dto) {
-        jpaQueryFactory.update(study1User).where(study1User.staticValue.eq(dto.getCurrentValue())).set(study1User.sortValue,dto.getChangeValue()).execute();
+        jpaQueryFactory.update(study1User).where(study1User.staticValue.eq(dto.getCurrentValue())).set(study1User.staticValue,dto.getChangeValue()).execute();
     }
 }
