@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "INDEX_USER_TABLE", indexes = {
-        @Index(name = "userid__index__user" ,columnList = "id, userName")
+        @Index(name = "category__index__user" ,columnList = "categoryEnum")
 })
 public class IndexUser{
     @Id
@@ -18,12 +18,15 @@ public class IndexUser{
 
     private String content;
 
+    @Enumerated(EnumType.STRING)
+    private IndexCategoryEnum categoryEnum;
 
     protected IndexUser(){}
 
-    public IndexUser(String userName, String content){
+    public IndexUser(String userName, String content, IndexCategoryEnum categoryEnum){
         this.userName = userName;
         this.content = content;
+        this.categoryEnum =categoryEnum;
     }
 
 }
